@@ -37,8 +37,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
 
     <script>
-        (function(){
-            var element = function(id){
+        (()=>{
+            var element = id=>{
                 return document.getElementById(id);
             }
 
@@ -71,7 +71,7 @@
                 console.log('Connected to socket...');
 
                 // Handle Output
-                socket.on('output', function(data){
+                socket.on('output', data=>{
                     //console.log(data);
                     if(data.length){
                         for(var x = 0;x < data.length;x++){
@@ -86,7 +86,7 @@
                 });
 
                 // Get Status From Server
-                socket.on('status', function(data){
+                socket.on('status', data=>{
                     // get message status
                     setStatus((typeof data === 'object')? data.message : data);
 
@@ -97,7 +97,7 @@
                 });
 
                 // Handle Input
-                textarea.addEventListener('keydown', function(event){
+                textarea.addEventListener('keydown', event=>{
                     if(event.which === 13 && event.shiftKey == false){
                         // Emit to server input
                         socket.emit('input', {
@@ -110,12 +110,12 @@
                 })
 
                 // Handle Chat Clear
-                clearBtn.addEventListener('click', function(){
+                clearBtn.addEventListener('click', ()=>{
                     socket.emit('clear');
                 });
 
                 // Clear Message
-                socket.on('cleared', function(){
+                socket.on('cleared', ()=>{
                     messages.textContent = '';
                 });
             }
